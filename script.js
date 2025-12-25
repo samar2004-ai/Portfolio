@@ -67,7 +67,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ------------------------------------------------------------------
-    // --- 2. Gestion de la Langue (Multilingue) - MISE À JOUR ---
+    // --- 3. Animation de défilement pour les sections ---
+    // ------------------------------------------------------------------
+
+    const sections = document.querySelectorAll('.main-section');
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
     // ------------------------------------------------------------------
 
     const langToggle = document.getElementById('lang-toggle');
@@ -85,16 +105,16 @@ document.addEventListener('DOMContentLoaded', () => {
             'nav_certifications': 'Certifications',
             'nav_activities': 'Activités & Bénévolat',
             'nav_contact': 'Contact',
-            'nav_events': 'Événements IT', // Nouvelle clé
+            'nav_events': 'Événements IT', 
             'section_about': 'À Propos',
-            'summary_text': 'Étudiante motivée en **IoT**, passionnée par les systèmes connectés et la communication entre les objets intelligents. J’aime explorer comment les dispositifs interagissent, échangent des données et créent de la valeur dans des environnements intelligents. Curieuse et proactive, j’apprécie relever de nouveaux défis, collaborer en équipe et transformer des idées en projets fonctionnels, fiables et pertinents. Mon objectif est de concevoir des solutions innovantes qui allient créativité, technologie et impact réel.',
+            'summary_text': 'Étudiante motivée en IoT, passionnée par les systèmes connectés et la communication entre les objets intelligents. J’aime explorer comment les dispositifs interagissent, échangent des données et créent de la valeur dans des environnements intelligents. Curieuse et proactive, j’apprécie relever de nouveaux défis, collaborer en équipe et transformer des idées en projets fonctionnels, fiables et pertinents. Mon objectif est de concevoir des solutions innovantes qui allient créativité, technologie et impact réel.',
             'about_languages_title': 'Langues',
             'lang_french': '🇫🇷 Français',
             'lang_english': '🇬🇧 Anglais',
             'lang_arabic': '🇹🇳 Arabe (Langue maternelle)',
             'section_skills': 'Compétences',
             'skills_tech_title': 'Techniques',
-            'skills_tech_lang': 'Langages: Python, Java, C/C++, **C#**, PHP, HTML, CSS',
+            'skills_tech_lang': 'Langages: Python, Java, C/C++, C#, PHP, HTML, CSS',
             'skills_tech_frameworks': 'Frameworks: React, Laravel, Flutter',
             'skills_tech_db': 'Bases de Données: MySQL, MongoDB',
             'skills_tech_iot': 'Systèmes Embarqués: Arduino',
@@ -116,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'exp_webdev_desc2': 'Contribution à l\'évolution et à la maintenance d\'une application web.',
             'exp_itintern_title': 'Stagiaire Informatique',
             'exp_itintern_company': 'Future vision, Messadine',
-            'exp_itintern_desc1': 'Obtention de la certification **C#** (Microsoft Learn).',
+            'exp_itintern_desc1': 'Obtention de la certification C# (Microsoft Learn).',
             'exp_itintern_desc2': 'Réalisation des mini projets pratiques.',
             'exp_pro_title': 'Expérience Professionnelle (Divers)',
             'exp_sales_title': 'Vendeuse & Caissière',
@@ -168,9 +188,9 @@ document.addEventListener('DOMContentLoaded', () => {
             'vol_cr_desc1': 'Formation aux premiers secours.',
             'vol_cr_desc2': 'Participation à des actions humanitaires.',
             'section_contact': 'Contact',
-            'contact_phone_label': '**Téléphone**',
-            'contact_email_label': '**Email**',
-            'contact_location_label': '**Localisation**',
+            'contact_phone_label': 'Téléphone',
+            'contact_email_label': 'Email',
+            'contact_location_label': 'Localisation',
             'footer_copyright': '&copy; 2025 Samar Ben Abderrahmen. Réalisé pour un portfolio professionnel.'
         },
         'en': {
@@ -186,14 +206,14 @@ document.addEventListener('DOMContentLoaded', () => {
             'nav_contact': 'Contact',
             'nav_events': 'IT Events',
             'section_about': 'About Me',
-            'summary_text': 'Motivated **IoT** student, passionate about connected systems and communication between intelligent objects. I enjoy exploring how devices interact, exchange data, and create value in smart environments. Curious and proactive, I appreciate taking on new challenges, collaborating in a team, and transforming ideas into functional, reliable, and relevant projects. My goal is to design innovative solutions that combine creativity, technology, and real impact.',
+            'summary_text': 'Motivated IoT student, passionate about connected systems and communication between intelligent objects. I enjoy exploring how devices interact, exchange data, and create value in smart environments. Curious and proactive, I appreciate taking on new challenges, collaborating in a team, and transforming ideas into functional, reliable, and relevant projects. My goal is to design innovative solutions that combine creativity, technology, and real impact.',
             'about_languages_title': 'Languages',
             'lang_french': '🇫🇷 French',
             'lang_english': '🇬🇧 English',
             'lang_arabic': '🇹🇳 Arabic (Native)',
             'section_skills': 'Skills',
             'skills_tech_title': 'Technical Skills',
-            'skills_tech_lang': 'Languages: Python, Java, C/C++, **C#**, PHP, HTML, CSS',
+            'skills_tech_lang': 'Languages: Python, Java, C/C++, C#*, PHP, HTML, CSS',
             'skills_tech_frameworks': 'Frameworks: React, Laravel, Flutter',
             'skills_tech_db': 'Databases: MySQL, MongoDB',
             'skills_tech_iot': 'Embedded Systems: Arduino',
@@ -215,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'exp_webdev_desc2': 'Contribution to the evolution and maintenance of a web application.',
             'exp_itintern_title': 'IT Intern',
             'exp_itintern_company': 'Future vision, Messadine',
-            'exp_itintern_desc1': 'Obtained **C#** certification (Microsoft Learn).',
+            'exp_itintern_desc1': 'Obtained C# certification (Microsoft Learn).',
             'exp_itintern_desc2': 'Execution of practical mini-projects.',
             'exp_pro_title': 'Professional Experience (Various)',
             'exp_sales_title': 'Saleswoman & Cashier',
@@ -267,9 +287,9 @@ document.addEventListener('DOMContentLoaded', () => {
             'vol_cr_desc1': 'First aid training.',
             'vol_cr_desc2': 'Participation in humanitarian actions.',
             'section_contact': 'Contact',
-            'contact_phone_label': '**Phone**',
-            'contact_email_label': '**Email**',
-            'contact_location_label': '**Location**',
+            'contact_phone_label': 'Phone',
+            'contact_email_label': 'Email',
+            'contact_location_label': 'Location',
             'footer_copyright': '&copy; 2025 Samar Ben Abderrahmen. Built for a professional portfolio.'
         }
     };
@@ -278,7 +298,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-key]').forEach(element => {
             const key = element.getAttribute('data-key');
             if (translations[lang] && translations[lang][key]) {
-                // Utiliser innerHTML pour conserver la mise en forme (comme **IoT**)
                 element.innerHTML = translations[lang][key]; 
             }
         });
@@ -297,7 +316,66 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ------------------------------------------------------------------
-    // --- 3. Logique du Menu Hamburger ---
+    // --- 4. Navigation Smooth Scroll et Active Class ---
+    // ------------------------------------------------------------------
+
+    const navLinks = document.querySelectorAll('#main-nav a[href^="#"]');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            const targetId = link.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                // Smooth scroll to section
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Update active class
+                navLinks.forEach(navLink => navLink.classList.remove('active'));
+                link.classList.add('active');
+                
+                // Close mobile menu if open
+                if (mainNav.classList.contains('open')) {
+                    mainNav.classList.remove('open');
+                    const icon = menuToggleBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                    header.appendChild(headerRight);
+                    headerRight.style.display = 'none';
+                }
+            }
+        });
+    });
+
+    // Update active link on scroll
+    const updateActiveLink = () => {
+        const sections = document.querySelectorAll('section[id]');
+        const scrollPosition = window.scrollY + 100; // Offset for header
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    };
+
+    window.addEventListener('scroll', updateActiveLink);
+    window.addEventListener('load', updateActiveLink);
+
     // ------------------------------------------------------------------
 
     const menuToggleBtn = document.getElementById('menu-toggle');

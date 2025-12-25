@@ -5,8 +5,39 @@ body{font-family:'Poppins',sans-serif;margin:0;padding:0;display:flex;flex-direc
 .site-logo{color:var(--color-accent);text-decoration:none;font-size:1.5em;font-weight:700;margin-right:30px}
 #main-nav ul{list-style:none;padding:0;margin:0;display:flex}
 #main-nav li{margin:0 15px}
-#main-nav a{color:var(--color-highlight);text-decoration:none;font-size:1em;padding:5px 0;transition:color .2s,border-bottom .2s;display:flex;align-items:center}
-#main-nav a:hover,#main-nav a.active{color:var(--color-card-bg);border-bottom:2px solid var(--color-accent)}
+#main-nav a {
+    color: var(--color-highlight);
+    text-decoration: none;
+    font-size: 1em;
+    padding: 5px 0;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+#main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+    transition: width 0.3s ease-in-out;
+}
+
+#main-nav a:hover::after,
+#main-nav a.active::after {
+    width: 100%;
+}
+
+#main-nav a:hover,
+#main-nav a.active {
+    color: var(--color-card-bg);
+    transform: translateY(-2px);
+}
 #main-nav a i{margin-right:8px;font-size:1.1em}
 .nav-text{display:inline}
 .header-right{display:flex;align-items:center;gap:20px}
@@ -20,7 +51,26 @@ body{font-family:'Poppins',sans-serif;margin:0;padding:0;display:flex;flex-direc
 .main-section{padding:80px 0;max-width:1100px;margin:auto}
 .secondary-bg{background-color:var(--color-secondary-bg);margin-left:-10px;margin-right:-10px;padding:10px 10px}
 .profile-presentation{display:flex;flex-direction:column;align-items:center;text-align:center}
-.profile-presentation .profile-pic{width:150px;height:150px;border-radius:50%;object-fit:cover;margin-bottom:20px;border:4px solid var(--color-accent);box-shadow:0 0 20px var(--color-shadow)}
+.profile-presentation .profile-pic {
+    width: 200px;        /* plus grand */
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+
+    /* Bordure fine et claire */
+    border: 4px solid #f0f0f0;
+
+    /* Ombre douce et halo lumineux plus prononcé */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1), 0 0 35px rgba(255, 223, 186, 0.35);
+
+    /* Transition douce pour effet hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.profile-presentation .profile-pic:hover {
+    transform: scale(1.08);   /* un peu plus grand au hover */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 0 45px rgba(255, 223, 186, 0.45);
+}
 .profile-presentation .text-content{max-width:800px}
 .profile-presentation h1{font-size:2.5em;color:var(--color-text-dark)}
 .profile-presentation .role{font-size:1.2em;margin-bottom:20px;color:var(--color-highlight)}
@@ -205,5 +255,122 @@ footer{text-align:center;padding:20px 0;margin-top:40px;font-size:.9em;color:var
 .front p {
     font-size: 0.9em;
     color: var(--color-highlight);
+}
+
+/* Effet de pulsation pour l'élément actif */
+#main-nav a.active {
+    animation: pulseActive 2s infinite;
+}
+
+@keyframes pulseActive {
+    0% {
+        text-shadow: 0 0 5px rgba(187, 134, 252, 0.3);
+    }
+    50% {
+        text-shadow: 0 0 15px rgba(187, 134, 252, 0.6);
+    }
+    100% {
+        text-shadow: 0 0 5px rgba(187, 134, 252, 0.3);
+    }
+}
+
+/* Animation d'apparition pour le menu mobile */
+#main-nav.open {
+    animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Effet de transition pour les sections lors du scroll */
+.main-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.main-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ajout d'un indicateur visuel pour la section active */
+#main-nav a.active i {
+    animation: bounceIcon 0.5s ease;
+}
+
+@keyframes bounceIcon {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Effet de transition pour les liens sociaux */
+.social-links a {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.social-links a:hover {
+    transform: scale(1.2) rotate(5deg);
+    color: var(--color-accent);
+}
+
+/* Transition smooth pour le changement de thème */
+#header, 
+.site-logo, 
+#main-nav a,
+.toggle-btn {
+    transition: all 0.4s ease;
+}
+
+/* Effet de focus pour l'accessibilité */
+#main-nav a:focus {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* Animation subtile au chargement de la page */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#main-nav {
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+/* Effet de vague sur hover pour le menu */
+#main-nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(187, 134, 252, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+#main-nav a:hover::before {
+    left: 100%;
 }
 

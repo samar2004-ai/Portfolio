@@ -7,40 +7,135 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .candidature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .candidacy-item {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .candidacy-item h3 {
+            margin-top: 0;
+            font-size: 1.25em;
+        }
+        .video-container {
+            overflow: hidden;
+            padding-bottom: 56.25%; /* Ratio 16:9 */
+            position: relative;
+            height: 0;
+            margin-top: 15px;
+        }
+        .video-container iframe {
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--color-accent); /* Adapter à votre variable CSS */
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-secondary {
+            display: inline-block;
+            background-color: var(--color-text-secondary); /* Adapter à votre variable CSS */
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        /* Styles pour le Modal */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.8); 
+        }
+        .modal-content {
+            background-color: var(--color-background-light);
+            margin: 5% auto; 
+            padding: 30px;
+            border: 1px solid #888;
+            width: 80%; 
+            max-width: 900px;
+            border-radius: 10px;
+            position: relative;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .letter-content {
+            white-space: pre-wrap; /* Maintient les sauts de ligne */
+            text-align: left;
+            line-height: 1.6;
+        }
+    </style>
 </head>
 <body>
     
     <header id="header">
-    <a href="#about" class="site-logo">Samar B.A.</a>
-    
-    <nav id="main-nav">
-        <ul>
-            <li><a href="#about" data-key="nav_about"><i class="fas fa-user-circle"></i> <span class="nav-text">À Propos</span></a></li>
-            <li><a href="#education" data-key="nav_education"><i class="fas fa-graduation-cap"></i> <span class="nav-text">Formation</span></a></li>
-            <li><a href="#experience" data-key="nav_experience"><i class="fas fa-briefcase"></i> <span class="nav-text">Expérience & Projets</span></a></li>
-            <li><a href="#certifications" data-key="nav_certifications"><i class="fas fa-certificate"></i> <span class="nav-text">Certifications</span></a></li>
-            <li><a href="#events" data-key="nav_events"><i class="fas fa-laptop-code"></i> <span class="nav-text">Événements IT</span></a></li>
-            <li><a href="#activities" data-key="nav_activities"><i class="fas fa-calendar-alt"></i> <span class="nav-text">Activités & Bénévolat</span></a></li>
-            <li><a href="#skills" data-key="nav_skills"><i class="fas fa-tools"></i> <span class="nav-text">Compétences</span></a></li>
-            <li><a href="#contact" data-key="nav_contact"><i class="fas fa-envelope"></i> <span class="nav-text">Contact</span></a></li>
-        </ul>
-    </nav>
-    
-    <div class="header-right">
-        <div class="social-links">
-            <a href="https://github.com/samar2004-ai" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/samar-ben-abderrahmen-839311320" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="https://www.instagram.com/sandn_jewelry/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#about" class="site-logo">Ben Abderrahmen</a>
+        
+        <nav id="main-nav">
+            <ul>
+                <li><a href="#about" data-key="nav_about"><i class="fas fa-user-circle"></i> <span class="nav-text">À Propos</span></a></li>
+                <li><a href="#education" data-key="nav_education"><i class="fas fa-graduation-cap"></i> <span class="nav-text">Formation</span></a></li>
+                <li><a href="#experience" data-key="nav_experience"><i class="fas fa-briefcase"></i> <span class="nav-text">Expérience & Projets</span></a></li>
+                <li><a href="#certifications" data-key="nav_certifications"><i class="fas fa-certificate"></i> <span class="nav-text">Certifications</span></a></li>
+                <li><a href="#events" data-key="nav_events"><i class="fas fa-laptop-code"></i> <span class="nav-text">Événements IT</span></a></li>
+                <li><a href="#activities" data-key="nav_activities"><i class="fas fa-calendar-alt"></i> <span class="nav-text">Activités & Bénévolat</span></a></li>
+                <li><a href="#skills" data-key="nav_skills"><i class="fas fa-tools"></i> <span class="nav-text">Compétences</span></a></li>
+                <li><a href="#candidature" data-key="nav_candidacy"><i class="fas fa-file-invoice"></i> <span class="nav-text">Candidature</span></a></li>
+                <li><a href="#contact" data-key="nav_contact"><i class="fas fa-envelope"></i> <span class="nav-text">Contact</span></a></li>
+            </ul>
+        </nav>
+        
+        <div class="header-right">
+            <div class="social-links">
+                <a href="https://github.com/samar2004-ai" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/samar-ben-abderrahmen-839311320" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+            
+            <div class="toggles-container">
+                <button id="lang-toggle" class="toggle-btn" title="Changer la langue">Fr / En</button>
+                <button id="theme-toggle" class="toggle-btn" title="Mode Sombre/Clair"><i class="fas fa-moon"></i></button>
+            </div>
         </div>
         
-        <div class="toggles-container">
-            <button id="lang-toggle" class="toggle-btn" title="Changer la langue">Fr / En</button>
-            <button id="theme-toggle" class="toggle-btn" title="Mode Sombre/Clair"><i class="fas fa-moon"></i></button>
-        </div>
-    </div>
-    
-    <button id="menu-toggle" class="menu-toggle-btn" aria-label="Menu"><i class="fas fa-bars"></i></button>
-</header>
+        <button id="menu-toggle" class="menu-toggle-btn" aria-label="Menu"><i class="fas fa-bars"></i></button>
+    </header>
 
     <div id="main-content">
         
@@ -54,8 +149,6 @@
                     <p class="summary" data-key="summary_text"></p> 
                 </div>
             </div>
-
-            
         </section>
 
         <hr>
@@ -139,7 +232,7 @@
                         <img src="images/focus-tracker.png" alt="Focus Tracker Preview">
                         <h5 data-key="proj_tracker_title">Focus Tracker (Mobile & Backend)</h5>
                         <p class="description" data-key="proj_tracker_desc">Développement d'une application mobile de suivi de la concentration avec analyse des performances en temps réel.</p>
-                        <p class="technologies">**Techs**: Flutter, Dart, Laravel, PHP, MySQL, REST API</p>
+                        <p class="technologies">Techs: Flutter, Dart, Laravel, PHP, MySQL, REST API</p>
                         <a href="https://github.com/samar2004-ai/focus_tracker" target="_blank" class="project-link" data-key="proj_link_github"><i class="fab fa-github"></i> Lien GitHub</a>
                     </div>
 
@@ -147,7 +240,7 @@
                         <img src="images/book_mood.png" alt="Book Mood Preview">
                         <h5 data-key="proj_bookmood_title">Book Mood (Système de Recommandation)</h5>
                         <p class="description" data-key="proj_bookmood_desc">Implémentation d'un système de recommandation de livres basé sur l'état d'esprit (mood) de l'utilisateur.</p>
-                        <p class="technologies">**Techs**: Python, Machine Learning (TensorFlow/Keras), Web</p>
+                        <p class="technologies">Techs: Python, Machine Learning (TensorFlow/Keras), Web</p>
                         <a href="https://github.com/samar2004-ai/book_mood" target="_blank" class="project-link" data-key="proj_link_github_bookmood"><i class="fab fa-github"></i> Lien GitHub</a>
                     </div>
 
@@ -155,7 +248,7 @@
                         <img src="images/formulaire_augmenté.png" alt="Formulaire Augmenté Preview">
                         <h5 data-key="proj_form_title">Formulaire Augmenté (Web)</h5>
                         <p class="description" data-key="proj_form_desc">Conception d'un formulaire interactif et dynamique utilisant des technologies frontend modernes.</p>
-                        <p class="technologies">**Techs**: React.js, JavaScript, HTML/CSS</p>
+                        <p class="technologies">Techs: React.js, JavaScript, HTML/CSS</p>
                         <a href="https://github.com/samar2004-ai/Formulaire-augment-" target="_blank" class="project-link" data-key="proj_link_github_form"><i class="fab fa-github"></i> Lien GitHub</a>
                     </div>
                 </div>
@@ -174,9 +267,6 @@
         </section>
 
         <hr>
-        
-        
-
         
         <section id="certifications" class="main-section">
             <h2 class="section-title" data-key="section_certifications">Certifications</h2>
@@ -348,15 +438,32 @@
 
         <hr>
         
-            
-            <section id="langues" class="subsection">
-                <h3 class="subsection-title" data-key="about_languages_title">Langues</h3>
-                <ul class="language-list">
-                    <li data-key="lang_french">🇫🇷 Français</li>
-                    <li data-key="lang_english">🇬🇧 Anglais</li>
-                    <li data-key="lang_arabic">🇹🇳 Arabe (Langue maternelle)</li>
-                </ul>
-            </section>
+        <section id="langues" class="subsection">
+            <h3 class="subsection-title" data-key="about_languages_title">Langues</h3>
+            <ul class="language-list">
+                <li data-key="lang_french">🇫🇷 Français</li>
+                <li data-key="lang_english">🇬🇧 Anglais</li>
+                <li data-key="lang_arabic">🇹🇳 Arabe (Langue maternelle)</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section id="candidature" class="main-section">
+            <h2 class="section-title" data-key="section_candidature">Dossier de Candidature</h2>
+
+            <div class="candidature-grid content-block">
+                
+                <div id="cv-download" class="card-light candidacy-item">
+                    <h3 class="subsection-title"><i class="fas fa-file-pdf"></i> Mon CV (Format PDF)</h3>
+                    <p data-key="cv_pdf_desc">Téléchargez mon Curriculum Vitae au format PDF pour une consultation hors ligne.</p>
+                    <a href="cv.pdf" download="Samar_Ben_Abderrahmen_CV" class="project-link btn-primary" data-key="cv_pdf_link">
+                        <i class="fas fa-download"></i> Télécharger le CV
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <hr>
 
         <section id="contact" class="main-section">
@@ -372,6 +479,51 @@
         </footer>
     </div>
     
+    <div id="modal-motivation" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('modal-motivation').style.display='none';">&times;</span>
+            <h2 data-key="modal_letter_title">Lettre de Motivation</h2>
+            <div class="letter-content">
+                <p class="lead">Madame, Monsieur,</p>
+
+
+<p>
+Actuellement étudiante en Internet des Objets et systèmes embarqués, je souhaite mettre en pratique mes compétences en développement backend et en intelligence artificielle au sein de votre équipe. Passionnée par la création de solutions intelligentes et performantes, je suis particulièrement motivée par les missions faisant appel à Python, FastAPI et l’intégration de modèles de Machine Learning dans des environnements réels.
+</p>
+
+
+<p>
+Durant mes études et projets personnels, j’ai acquis une solide expérience dans la conception et le déploiement d’API REST avec FastAPI, l’entraînement et la mise en production de modèles TensorFlow, ainsi que la manipulation de bases de données SQL et NoSQL. J’ai également travaillé sur des interfaces frontales avec React.js et des applications mobiles avec Flutter, ce qui me permet de comprendre l’ensemble du cycle de développement produit.
+</p>
+
+
+<p>
+Curieuse, rigoureuse et autonome, j’apprécie le travail en équipe et j’ai à cœur d’améliorer constamment mes compétences. Je suis convaincue que mon profil technique et ma capacité d’adaptation me permettront de contribuer efficacement à vos projets, notamment ceux qui nécessitent l’intégration de l’IA dans des solutions concrètes et scalables.
+</p>
+
+
+<p class="signature">
+Je vous remercie pour l’attention portée à ma candidature et reste à votre disposition pour un entretien afin de vous exposer plus en détail mes réalisations et motivations.
+</p>
+
+
+<p>
+Cordialement,<br>
+<strong>Samar Ben Abderrahmen</strong>
+</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Script pour fermer le modal en cliquant en dehors
+        var modal = document.getElementById('modal-motivation');
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
